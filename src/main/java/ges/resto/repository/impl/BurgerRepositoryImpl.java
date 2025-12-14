@@ -113,6 +113,7 @@ public class BurgerRepositoryImpl implements BurgerRepository {
 
             ps.setInt(1, id);
 
+           
             return database.<Burger>fetch(ps, this::toEntity);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,6 +121,7 @@ public class BurgerRepositoryImpl implements BurgerRepository {
 
         return Optional.empty();
     }
+
 
     private Burger toEntity(ResultSet rs) throws SQLException {
         Burger burger = new Burger();
@@ -134,7 +136,7 @@ public class BurgerRepositoryImpl implements BurgerRepository {
             try {
                 burger.setEtat(Etat.valueOf(etatStr));
             } catch (IllegalArgumentException e) {
-                // Valeur inattendue → fallback sécurisé
+                
                 burger.setEtat(Etat.Disponible);
             }
         } else {

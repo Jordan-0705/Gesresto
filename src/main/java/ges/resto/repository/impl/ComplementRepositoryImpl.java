@@ -11,6 +11,7 @@ import java.util.Optional;
 import ges.resto.database.Database;
 import ges.resto.entity.Complement;
 import ges.resto.entity.ComplementType;
+import ges.resto.entity.Etat;
 import ges.resto.repository.ComplementRepository;
 
 public class ComplementRepositoryImpl implements ComplementRepository {
@@ -35,13 +36,14 @@ public class ComplementRepositoryImpl implements ComplementRepository {
         try {
             Connection conn = database.getConnection();
             PreparedStatement ps = conn.prepareStatement(
-                    "INSERT INTO complement(code, nom, prix, complement_type) VALUES (?, ?, ?, ?)"
+                    "INSERT INTO complement(code, nom, prix, complement_type, etat) VALUES (?, ?, ?, ?, ?)"
             );
 
             ps.setString(1, complement.getCode());
             ps.setString(2, complement.getNom());
             ps.setDouble(3, complement.getPrix());
             ps.setString(4, complement.getComplementType().name());   // enum → string
+            ps.setString(5, complement.getEtat().name());
 
             return ps.executeUpdate();
 
@@ -56,13 +58,13 @@ public class ComplementRepositoryImpl implements ComplementRepository {
         try {
             Connection conn = database.getConnection();
             PreparedStatement ps = conn.prepareStatement(
-                "UPDATE complement SET code=?, nom=?, prix=?, complement_type=? WHERE id=?"
+                "UPDATE complement SET nom=?, prix=?, complement_type=?, etat=? WHERE id=?"
             );
 
-            ps.setString(1, complement.getCode());
-            ps.setString(2, complement.getNom());
-            ps.setDouble(3, complement.getPrix());
-            ps.setString(4, complement.getComplementType().name());
+            ps.setString(1, complement.getNom());
+            ps.setDouble(2, complement.getPrix());
+            ps.setString(3, complement.getComplementType().name());
+            ps.setString(4, complement.getEtat().name());
             ps.setInt(5, complement.getId());
 
             return ps.executeUpdate();
@@ -96,7 +98,7 @@ public class ComplementRepositoryImpl implements ComplementRepository {
         try {
             Connection conn = database.getConnection();
             PreparedStatement ps = conn.prepareStatement(
-                "SELECT * FROM complement"
+                "SELECT * FROM complement ORDER BY id ASC"
             );
 
             return database.<Complement>fetchAll(ps, this::toEntity);
@@ -153,6 +155,7 @@ public class ComplementRepositoryImpl implements ComplementRepository {
         c.setPrix(rs.getDouble("prix"));
 
         c.setComplementType(ComplementType.valueOf(rs.getString("complement_type")));
+        c.setEtat(rs.getString("etat").equals("Disponible") ? Etat.Disponible : Etat.Archived);
 
         return c;
     }

@@ -4,12 +4,12 @@ import ges.resto.factory.repository.EntityName;
 import ges.resto.factory.repository.RepositoryFactory;
 import ges.resto.repository.BurgerRepository;
 import ges.resto.repository.ComplementRepository;
+import ges.resto.repository.GestionnaireRepository;
 import ges.resto.repository.MenuRepository;
-// import ges.resto.repository.GestionnaireRepository;
 import ges.resto.service.impl.BurgerServiceImpl;
 import ges.resto.service.impl.ComplementServiceImpl;
+import ges.resto.service.impl.GestionnaireServiceImpl;
 import ges.resto.service.impl.MenuServiceImpl;
-// import ges.resto.service.impl.GestionnaireServiceImpl;
 
 public final class ServiceFactory {
 
@@ -30,10 +30,10 @@ public final class ServiceFactory {
                 return MenuServiceImpl.getInstance(
                         (MenuRepository) RepositoryFactory.getInstance(EntityName.Menu)
                 );
-            // case Gestionnaire:
-            //     return GestionnaireServiceImpl.getInstance(
-            //             (GestionnaireRepository) RepositoryFactory.getInstance(EntityName.Gestionnaire)
-            //    );
+            case Gestionnaire:
+                return GestionnaireServiceImpl.getInstance(
+                        (GestionnaireRepository) RepositoryFactory.getInstance(EntityName.Gestionnaire)
+               );
             default:
                 throw new IllegalArgumentException("Unknown Entity: " + entityName);
         }

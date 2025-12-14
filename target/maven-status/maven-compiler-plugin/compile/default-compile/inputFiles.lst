@@ -17,14 +17,18 @@ C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ge
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\Main.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\repository\BurgerRepository.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\repository\ComplementRepository.java
+C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\repository\GestionnaireRepository.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\repository\impl\BurgerRepositoryImpl.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\repository\impl\ComplementRepositoryImpl.java
+C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\repository\impl\GestionnaireRepositoryImpl.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\repository\impl\MenuRepositoryImpl.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\repository\MenuRepository.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\service\BurgerService.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\service\ComplementService.java
+C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\service\GestionnaireService.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\service\impl\BurgerServiceImpl.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\service\impl\ComplementServiceImpl.java
+C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\service\impl\GestionnaireServiceImpl.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\service\impl\MenuServiceImpl.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\service\MenuService.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\service\Service.java
@@ -32,5 +36,6 @@ C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ge
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\service\Test.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\view\BurgerView.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\view\ComplementView.java
+C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\view\GestionnaireView.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\view\MenuView.java
 C:\Users\DELL\Documents\Tous Dossiers\Utilitaires\Java\gesresto\src\main\java\ges\resto\view\View.java

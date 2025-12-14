@@ -1,9 +1,5 @@
 package ges.resto.service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 public class Test {
     
     public static boolean isNumeric(String saisie) {
@@ -61,21 +57,4 @@ public class Test {
         }
         return 3;
     }
-
-    public static boolean isDateValide(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        try {
-            LocalDate dateSaisie = LocalDate.parse(date, formatter);
-            LocalDate aujourdHui = LocalDate.now();
-            LocalDate dateMin = LocalDate.of(2000, 1, 1); // borne minimale autorisée
-
-            // Vérifie si la date est entre 01-01-2000 et aujourd'hui
-            return !dateSaisie.isAfter(aujourdHui) && !dateSaisie.isBefore(dateMin);
-
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-
-
 }

@@ -16,10 +16,11 @@ public class Complement {
     private String nom;
     private double prix;
     private ComplementType ComplementType;
+    private Etat etat;
 
     @Override
     public String toString() {
-        return String.format("%03d | %-7s | %-20s | %8.2f | %-10s",
-                id, code, nom, prix, ComplementType);
+        return String.format("%03d | %-7s | %-20s | %8.2f FCFA | %-10s | %-7s",
+                id, code, nom, prix, ComplementType, etat);
     }
 }

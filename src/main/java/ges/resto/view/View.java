@@ -11,67 +11,16 @@ public class View {
     
     protected static String saisieChaine(String message) {
 
-    String mot;
-    Scanner scanner = new Scanner(System.in);
+        String mot;
+        Scanner scanner = new Scanner(System.in);
 
-    do {
-        System.out.print(message);
-        mot = scanner.nextLine();
-    } while (!mot.matches("[a-zA-Z ]+"));  // <-- Autorise lettres + espaces
+        do {
+            System.out.print(message);
+            mot = scanner.nextLine();
+        } while (!mot.matches("[a-zA-Z ]+"));  
 
-    return mot.trim();  // retire les espaces inutiles au début et fin
-}
-
-
-    // protected static String saisieTel(String message) {
-        
-    //     String tel;
-    //     Scanner scanner = new Scanner(System.in);
-
-    //     do {
-    //         System.out.println(message);
-    //         tel = scanner.nextLine();
-    //         switch (Test.isTel(tel)) {
-    //             case 0:
-    //                 System.err.println("Le numero doit contenir 9 chiffres !");
-    //                 break;
-    //             case 1:
-    //                 System.err.println("Le numero doit commencer par 77, 78, 70 ou 76 !");
-    //                 break;
-    //             case 2:
-    //                 System.err.println("Le numero ne doit contenir que des chiffres !");
-    //                 break;
-    //             default:
-    //                 break;
-    //         }
-    //     } while (Test.isTel(tel) != 3);
-    //     return tel;
-    // }
-
-    // protected static String saisieFix(String message) {
-        
-    //     String fix;
-    //     Scanner scanner = new Scanner(System.in);
-
-    //     do {
-    //         System.out.println(message);
-    //         fix = scanner.nextLine();
-    //         switch (Test.isFix(fix)) {
-    //             case 0:
-    //                 System.err.println("Le numero doit contenir 9 chiffres !");
-    //                 break;
-    //             case 1:
-    //                 System.err.println("Le numero doit commencer par 33 !");
-    //                 break;
-    //             case 2:
-    //                 System.err.println("Le numero ne doit contenir que des chiffres !");
-    //                 break;
-    //             default:
-    //                 break;
-    //         }
-    //     } while (Test.isFix(fix) != 3);
-    //     return fix;
-    // }
+        return mot.trim();  
+    }
 
     protected static double saisieDouble(String message) {
         
@@ -147,5 +96,102 @@ public class View {
         }
     }
 
+    protected static Etat saisieEtatOuVide(Etat etatActuel) {
+        Scanner sc = new Scanner(System.in);
+        String choix;
 
+        while (true) {
+            System.out.println("Choisissez l'état :");
+            System.out.println("1 - Disponible");
+            System.out.println("2 - Archived");
+            System.out.println("Entrée - Conserver (" + etatActuel + ")");
+            System.out.print("Votre choix : ");
+
+            choix = sc.nextLine().trim();
+
+            if (choix.isEmpty()) {
+                return etatActuel;
+            }
+
+            switch (choix) {
+                case "1":
+                    return Etat.Disponible;
+                case "2":
+                    return Etat.Archived;
+                default:
+                    System.out.println("Choix invalide, veuillez réessayer.\n");
+            }
+        }
+    }
+
+    protected static String saisieChaineOuVide(String message) {
+        Scanner scanner = new Scanner(System.in);
+        String saisie;
+
+        while (true) {
+            System.out.print(message);
+            saisie = scanner.nextLine().trim();
+
+            if (saisie.isEmpty()) {
+                return "";
+            }
+
+            if (saisie.matches("[a-zA-Z ]+")) {
+                return saisie;
+            }
+
+            System.out.println("Saisie invalide (lettres et espaces uniquement).");
+        }
+    }
+
+    protected static Double saisieDoubleOuVide(String message) {
+        Scanner scanner = new Scanner(System.in);
+        String saisie;
+
+        while (true) {
+            System.out.print(message);
+            saisie = scanner.nextLine().trim();
+
+            if (saisie.isEmpty()) {
+                return null;
+            }
+
+            if (Test.isDouble(saisie)) {
+                return Double.parseDouble(saisie);
+            }
+
+            System.out.println("Saisie invalide (entrez un nombre ou vide pour conserver).");
+        }
+    }
+
+
+    protected static ComplementType saisieTypeOuVide(ComplementType typeActuel) {
+        Scanner sc = new Scanner(System.in);
+        String choix;
+
+        while (true) {
+            System.out.println("Choisissez le type de complément :");
+            System.out.println("1 - FRITE");
+            System.out.println("2 - BOISSON");
+            System.out.println("Entrée - Conserver (" + typeActuel + ")");
+            System.out.print("Votre choix : ");
+
+            choix = sc.nextLine().trim();
+
+            if (choix.isEmpty()) {
+                return typeActuel;
+            }
+
+            switch (choix) {
+                case "1":
+                    return ComplementType.Frites;
+                case "2":
+                    return ComplementType.Boisson;
+                default:
+                    System.out.println("Choix invalide, veuillez réessayer.\n");
+            }
+        }
+    }
+
+    
 }

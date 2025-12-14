@@ -23,14 +23,15 @@ public class Menu {
     @Override
     public String toString() {
         return String.format(
-                "%03d | %-7s | %-20s | BURGER: %-20s | FRITE: %-15s | BOISSON: %-15s | %8.2f",
+                "%03d | %-6s | %-18s | BURGER: %-18s | FRITE: %-12s | BOISSON: %-12s | %9s FCFA | %s",
                 id,
                 code,
                 nom,
                 burger != null ? burger.getNom() : "Aucun",
                 frites != null ? frites.getNom() : "Aucune",
                 boisson != null ? boisson.getNom() : "Aucune",
-                prix
+                prix,
+                etat
         );
     }
 }

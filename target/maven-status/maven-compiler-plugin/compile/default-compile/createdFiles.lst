@@ -4,11 +4,15 @@ ges\resto\factory\database\EntityManager.class
 ges\resto\entity\Burger.class
 ges\resto\factory\repository\RepositoryFactory.class
 ges\resto\factory\service\ServiceFactory.class
+ges\resto\repository\impl\GestionnaireRepositoryImpl.class
 ges\resto\entity\Gestionnaire.class
 ges\resto\factory\repository\PersistanceName.class
 ges\resto\service\Sys.class
+ges\resto\view\GestionnaireView.class
+ges\resto\repository\GestionnaireRepository.class
 ges\resto\repository\impl\ComplementRepositoryImpl.class
 ges\resto\repository\BurgerRepository.class
+ges\resto\service\GestionnaireService.class
 ges\resto\factory\database\SgbdName.class
 ges\resto\repository\impl\MenuRepositoryImpl.class
 ges\resto\factory\database\DatabaseFactory.class
@@ -24,6 +28,7 @@ ges\resto\repository\MenuRepository.class
 ges\resto\entity\Complement.class
 ges\resto\service\impl\ComplementServiceImpl.class
 ges\resto\repository\impl\BurgerRepositoryImpl.class
+ges\resto\service\impl\GestionnaireServiceImpl.class
 ges\resto\view\ComplementView.class
 ges\resto\Main.class
 ges\resto\service\ComplementService.class

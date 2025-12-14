@@ -2,10 +2,12 @@ package ges.resto.view;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 
 import ges.resto.entity.Burger;
 import ges.resto.entity.Etat;
 import ges.resto.service.BurgerService;
+import ges.resto.service.Sys;
 
 public class BurgerView extends View {
 
@@ -26,19 +28,29 @@ public class BurgerView extends View {
 
     public void showMenu() {
     int choix;
+    Scanner sc = new Scanner(System.in);
 
     do {
-        System.out.println("\n===== BURGER VIEW =====\n");
-        System.out.println("1 - Ajouter un burger");
-        System.out.println("2 - Lister les burgers");
-        System.out.println("3 - Rechercher par ID");
-        System.out.println("4 - Modifier un burger");
-        System.out.println("5 - Supprimer un burger");
-        System.out.println("6 - Archiver un burger");
-        System.out.println("0 - Quitter");
-        System.out.print("Votre choix : ");
+        while(true) {
+            Sys.cls();
+            System.out.println("\n===== BURGER VIEW =====\n");
+            System.out.println("1 - Ajouter un burger");
+            System.out.println("2 - Lister les burgers");
+            System.out.println("3 - Rechercher par ID");
+            System.out.println("4 - Modifier un burger");
+            System.out.println("5 - Supprimer un burger");
+            System.out.println("6 - Archiver un burger");
+            System.out.println("0 - Quitter");
+            System.out.print("\nVotre choix : ");
 
-        choix = saisieEntier("");
+            try {
+                choix = Integer.parseInt(sc.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.print("\nVeuillez saisir un entier !!!\n");
+                Sys.pause();
+            }
+        }
 
         switch (choix) {
             case 1 -> ajouterBurger();
@@ -58,26 +70,30 @@ public class BurgerView extends View {
 
         Burger b = new Burger();
 
-        b.setNom(saisieChaine("Nom : "));
+        b.setNom(Sys.capitalize(saisieChaine("Nom : ")));
         b.setPrix((saisieDouble("Prix : ")));
         b.setEtat(Etat.Disponible);
 
         int result = burgerService.addBurger(b);
         System.out.println(result > 0 ? "Burger ajouté !" : "Erreur d'ajout.");
+
+        Sys.pause();
     }
 
     private void listerBurgers() {
-        System.out.println("\n--- LISTE DES BURGERS ---");
+        System.out.println("\n--- LISTE DES BURGERS ---\n");
 
         List<Burger> burgers = burgerService.findAllBurger();
         if (burgers.isEmpty()) {
             System.out.println("Aucun burger trouvé.");
+            Sys.pause();
             return;
         }
 
         for (Burger b : burgers) {
             System.out.println(b);
         }
+        Sys.pause();
     }
 
     private void rechercherBurger() {
@@ -93,20 +109,30 @@ public class BurgerView extends View {
         } else {
             System.out.println("Aucun burger avec cet ID.");
         }
+
+        Sys.pause();
     }
 
     private void supprimerBurger() {
         int id = saisieEntier("ID du burger à supprimer : ");
+
+        Optional<Burger> opt = burgerService.findById(id);
+        if (opt.isEmpty()) {
+            System.out.println("Aucun burger avec cet ID.");
+            Sys.pause();
+            return;
+        }
 
         int result = burgerService.deleteBurger(id);
 
         if (result > 0) {
             System.out.println("Burger supprimé !");
         } else {
-            System.out.println("Aucun burger supprimé.");
+            System.out.println("Erreur lors de la suppression.");
         }
-    }
 
+        Sys.pause();
+    }
 
     private void archiverBurger() {
         int id = saisieEntier("ID du burger à archiver : ");
@@ -115,6 +141,13 @@ public class BurgerView extends View {
 
         if (opt.isPresent()) {
             Burger b = opt.get();
+
+            if (b.getEtat() == Etat.Archived) {
+                System.out.println("Ce burger est déjà archivé.");
+                Sys.pause();
+                return;
+            }
+
             b.setEtat(Etat.Archived);
 
             int result = burgerService.updateBurger(b);
@@ -127,30 +160,41 @@ public class BurgerView extends View {
         } else {
             System.out.println("Aucun burger avec cet ID.");
         }
+
+        Sys.pause();
     }
 
     public void modifierBurger() {
-    int id = saisieEntier("Entrer l'ID du burger à modifier : ");
+        int id = saisieEntier("Entrer l'ID du burger à modifier : ");
 
-    Optional<Burger> opt = burgerService.findById(id);
-    if (opt == null) {
-        System.out.println("Burger introuvable.");
-        return;
+        Optional<Burger> opt = burgerService.findById(id);
+        if (opt.isEmpty()) {
+            System.out.println("Burger introuvable.");
+            Sys.pause();
+            return;
+        }
+
+        Burger burger = opt.get();
+        System.out.println("=== Modification du burger " + burger.getNom() + " ===");
+        System.out.println("(Appuyez sur Entrée pour conserver la valeur actuelle)\n");
+
+        String nom = saisieChaineOuVide("Nom (" + burger.getNom() + ") : ");
+        if (!nom.isBlank()) {
+            burger.setNom(Sys.capitalize(nom));
+        }
+
+        Double prixInput = saisieDoubleOuVide("Prix (" + burger.getPrix() + ") : ");
+        if (prixInput != null) {
+            burger.setPrix(prixInput.intValue()); 
+        }
+
+        Etat etat = saisieEtatOuVide(burger.getEtat());
+        burger.setEtat(etat);
+
+        burgerService.updateBurger(burger);
+
+        System.out.println("Burger modifié avec succès !");
+        Sys.pause();
     }
-    Burger burger = opt.get();
-    System.out.println("=== Modification du burger " + burger.getNom() + " ===");
-
-    String nom = saisieChaine("Nouveau nom : ");
-    int prix = saisieEntier("Nouveau prix : ");
-    Etat etat = saisieEtat();
-
-    burger.setNom(nom);
-    burger.setPrix(prix);
-    burger.setEtat(etat);
-
-    burgerService.updateBurger(burger);
-
-    System.out.println("Burger modifié avec succès !");
-}
 
 }

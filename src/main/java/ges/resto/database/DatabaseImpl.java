@@ -92,12 +92,12 @@ public class DatabaseImpl implements Database {
         if (rs.next()) {
             data = convert.toEntity(rs);
         }
-        return Optional.of((T) data);
+        return Optional.ofNullable(data);
     }
 
     @Override
     public void testConnection() {
-        Connection conn = getConnection();    // ✔ on NE le met PAS dans un try-with-resources !
+        Connection conn = getConnection();  
         if (conn != null) {
             System.out.println("Connexion OK !");
         } else {

@@ -30,10 +30,4 @@ public class Sys {
         }
         return mot.substring(0, 1).toUpperCase() + mot.substring(1).toLowerCase();
     }
-
-    public static String date(LocalDate date) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    return date.format(formatter);
-    }
-
 }

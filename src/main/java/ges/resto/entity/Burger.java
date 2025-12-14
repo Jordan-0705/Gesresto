@@ -19,7 +19,7 @@ public class Burger {
 
     @Override
     public String toString() {
-        return String.format("%03d | %-7s | %-20s | %8.2f | %s",
+        return String.format("%03d | %-7s | %-20s | %8.2f FCFA | %s",
                 id, code, nom, prix, etat);
     }
 }
